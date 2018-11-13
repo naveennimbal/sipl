@@ -69,9 +69,18 @@ $userData = $this->session->userdata("user");
             <!-- /Logo -->
             <ul class="nav navbar-top-links navbar-right pull-right">
 
-                <li>
-                	<a class="profile-pic" href="#"> <b class="hidden-xs"><?php echo ucfirst($userData->name)?></b></a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <b class="hidden-xs"><?php echo ucfirst($userData->name)?></b> <span class="fa fa-angle-double-down"></span> </a>
+                    <ul class="dropdown-menu dropdown-user animated flipInY">
+                        <li>
+                            <div class="dw-user-box">
 
+                                <div class="u-text">
+                                    <a href="<?php echo base_url("login/logout")?>" class="btn btn-rounded btn-danger btn-sm" style="padding-right: 3em; padding-left: 3em;margin-left: 3em;">Logout</a></div>
+                            </div>
+                        </li>
+
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -188,6 +197,13 @@ $userData = $this->session->userdata("user");
                 </li>
                                     
                     </ul>
+
+                <li style="margin-top: 2em;">
+                      <div class="u-text">
+                          <a href="<?php echo base_url("login/logout")?>" class="btn btn-rounded btn-danger btn-sm" style="margin-left:1em;color:#FFF;width: 80%;">Logout</a></div>
+                    </div>
+
+                </li>
 
 
             </ul>

@@ -27,8 +27,19 @@ class Main extends CI_Controller
 
         $this->load->library('grocery_CRUD');
 
+        //echo "<pre>";
+        //var_dump($this->uri->segment(2)); exit;
+
 
     }
+
+
+    public function index(){
+        $this->checkLogin();
+    }
+
+
+
 
     public function dashboard()
     {
@@ -129,7 +140,8 @@ public function purchaseorder()
         $crud->required_fields("company_id","vendor_id","vendor_bank_id","po_no","po_date","vendor_ref_no","site_address");           
         
         $crud->set_relation('vendor_id','vendor_master','name');    
-        $crud->set_relation('vendor_bank_id','vendor_bank_master','bank_name');    
+        $crud->set_relation('vendor_bank_id','vendor_bank_master','bank_name');
+
 
                 
         $output = $crud->render();
@@ -842,7 +854,7 @@ public function projectdpr()
 
         $user = $this->session->userdata('user');
         if (!isset($user->id)) {
-            redirect("main/login/2");
+            redirect("login/index/2");
         }
 
     }

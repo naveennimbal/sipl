@@ -199,6 +199,13 @@ $userData = $this->session->userdata("user");
                                     
                     </ul>
 
+                 <li style="margin-top: 2em;">
+                         <div class="u-text">
+                              <a href="<?php echo base_url("login/logout")?>" class="btn btn-rounded btn-danger btn-sm" style="margin-left:1em;color:#FFF;width: 80%;">Logout</a></div>
+                         </div>
+
+                  </li>
+
 
             </ul>
 
@@ -280,6 +287,6 @@ $userData = $this->session->userdata("user");
 <script src="<?php echo base_url()."assets/layout/"?>js/custom.min.js?<?php echo time(); ?>"></script>
 <script src="<?php echo base_url()."assets/layout/"?>js/update.js?<?php echo time(); ?>"></script>
 
-
+</body>
 
 </html>
