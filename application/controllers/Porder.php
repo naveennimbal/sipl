@@ -22,6 +22,7 @@ class Porder extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->model('users_model');
+        $this->load->model('Porder_model');
         /* ------------------ */
 
         // $this->load->library('grocery_CRUD');
@@ -36,12 +37,48 @@ class Porder extends CI_Controller {
         if($msg==2){$msg="Your are not logged in  ";}
         if($msg==3){$msg="Your are securely logged out   ";}
 
+        $vendors = $this->Porder_model->getVendors();
 
-        $list = $this->load->view('po/index.php',array("rights"=>""),TRUE);
+        $list = $this->load->view('po/index.php',array("vendors"=>$vendors),TRUE);
 
         $this->load->view('dashboard.php',array("output"=>$list));
        // $this->load->view('po/index.php',array("msg"=>$msg));
     }
+
+     public function add($msg="")
+    {
+
+        $vendors = $this->Porder_model->getVendors();
+
+        $list = $this->load->view('po/add.php',array("vendors"=>$vendors),TRUE);
+
+        $this->load->view('dashboard.php',array("output"=>$list));
+       // $this->load->view('po/index.php',array("msg"=>$msg));
+    }
+
+
+
+
+
+
+    public function vendorbank(){
+
+        //$vendorId = $_POST['vendorID'];
+        $vendorId = 1;
+
+        $banks = $this->Porder_model->getVendorBanks($vendorId);
+        $bankArr = array();
+
+        foreach ($banks as $bank) {
+            $bankArr[] = $bank;
+            //$bankArr['bank_name'][] = $bank->bank_name;
+        }
+
+        echo json_encode($bankArr); exit;
+
+    }
+
+
 
 
 

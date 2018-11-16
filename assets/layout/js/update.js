@@ -43,4 +43,34 @@ $(document).ready(function(){
        }
 
 
+    $('#podate').datepicker();
+
+    $("#vendor").change(function(){
+            vendorId =$(this).val();
+        $.ajax({
+            method: "POST",
+            url: window.baseurl+"porder/vendorbank",
+            data:{"vendorID":vendorId},
+            beforeSend: function( xhr ) {
+                //xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+               // $("#loadingModal").modal('show');
+            }
+        })
+            .done(function( data ) {
+                console.log($.parseJSON(data));
+                xhr = $.parseJSON(data);
+               /*for(a in xhr ){
+                    console.log(xhr.a[id]);
+                } */
+                var result = "";
+
+                $.each(xhr, function(k, v) {
+                   // console.log(k,"this is key")
+                   // console.log(v,"this is val")
+                   $("#vendorbank").append("<option value='"+v.id+"'>"+v.bank_name+"</option>")
+                });
+
+            });
+    })
+
 })
