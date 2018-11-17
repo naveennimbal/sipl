@@ -37,23 +37,44 @@ class Porder extends CI_Controller {
         if($msg==2){$msg="Your are not logged in  ";}
         if($msg==3){$msg="Your are securely logged out   ";}
 
-        $vendors = $this->Porder_model->getVendors();
+        $orders = $this->Porder_model->getOrders();
 
-        $list = $this->load->view('po/index.php',array("vendors"=>$vendors),TRUE);
+        $list = $this->load->view('po/index.php',array("orders"=>$orders),TRUE);
 
         $this->load->view('dashboard.php',array("output"=>$list));
        // $this->load->view('po/index.php',array("msg"=>$msg));
     }
 
-     public function add($msg="")
+     public function add()
     {
+        if($_POST){
+            //var_dump($_POST); exit;
+            $data = array();
+            $date = date('Y-m-d',strtotime($_POST['po_date']));
 
-        $vendors = $this->Porder_model->getVendors();
+            //var_dump($date); exit;
+            $data['po_no'] = $_POST['po_no'];
+            $data['po_date']= $date;
+            $data['vendor_id']  = $_POST['vendor'];
+            $data['vendor_bank_id'] = $_POST['vendor_bank'];
+            $data['site_address']  = $_POST['site_address'];
+            $data['ship_to']= $_POST['shipping_address'];
+            $data['remarks']= $_POST['remarks'];
+            $id = $this->Porder_model->addOrder($data);
 
-        $list = $this->load->view('po/add.php',array("vendors"=>$vendors),TRUE);
+            //var_dump($id);
+            redirect('porder');
+            return;
 
-        $this->load->view('dashboard.php',array("output"=>$list));
-       // $this->load->view('po/index.php',array("msg"=>$msg));
+        } else {
+
+            $vendors = $this->Porder_model->getVendors();
+
+            $list = $this->load->view('po/add.php', array("vendors" => $vendors), TRUE);
+
+            $this->load->view('dashboard.php', array("output" => $list));
+            // $this->load->view('po/index.php',array("msg"=>$msg));
+        }
     }
 
 
@@ -63,8 +84,8 @@ class Porder extends CI_Controller {
 
     public function vendorbank(){
 
-        //$vendorId = $_POST['vendorID'];
-        $vendorId = 1;
+        $vendorId = $_POST['vendorID'];
+        //$vendorId = 1;
 
         $banks = $this->Porder_model->getVendorBanks($vendorId);
         $bankArr = array();

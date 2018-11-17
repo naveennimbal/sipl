@@ -17,20 +17,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Deshmukh</td>
-                <td>Prohaska</td>
 
-                <td>admin</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Deshmukh</td>
-                <td>Gaylord</td>
 
-                <td>member</td>
+            <?php
+            foreach ($orders as $order) :
+            ?>
+            <tr>
+                <td><?php echo $order->po_no;?></td>
+                <td><?php echo $order->name;?></td>
+                <td><?php echo $order->po_date;?></td>
+
+
+                <td><a class="addtrans" href="<?php echo base_url('porder/addtransactions')?>/<?php echo $order->id?>">Add Items</a> </td>
             </tr>
+           <?php endforeach;?>
 
             </tbody>
         </table>
