@@ -28,7 +28,7 @@
                 <td><?php echo $order->po_date;?></td>
 
 
-                <td><a class="addtrans" href="<?php echo base_url('porder/addtransactions')?>/<?php echo $order->id?>">Add Items</a> </td>
+                <td><a class="additem" href="<?php echo base_url('porder/additems')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "600px"}}}'>Add Items</a> </td>
             </tr>
            <?php endforeach;?>
 
