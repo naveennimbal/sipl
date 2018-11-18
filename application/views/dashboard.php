@@ -33,8 +33,9 @@ $userData = $this->session->userdata("user");
     <link href="<?php echo base_url()."assets/layout/"?>css/icons/linea-icons/linea.css" rel="stylesheet">
     <link href="<?php echo base_url()."assets/layout/"?>css/icons/material-design-iconic-font/css/materialdesignicons.min.css" rel="stylesheet">
     <!-- Custom CSS -->
+    <link href="<?php echo base_url()."assets/layout/"?>css/jquery.fancybox.min.css" rel="stylesheet">
     <link href="<?php echo base_url()."assets/layout/"?>css/style.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url()."assets/grocery_crud/"?>css/jquery_plugins/fancybox/jquery.fancybox.css" />
+
     <!-- color CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>css/colors/default.css" id="theme" rel="stylesheet">
     <script type="application/javascript">
@@ -286,8 +287,9 @@ $userData = $this->session->userdata("user");
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
 <!-- Sparkline chart JavaScript -->
-<script src="<?php echo base_url()."assets"?>/grocery_crud/js/jquery_plugins/jquery.fancybox-1.3.4.js"></script>
+
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="<?php echo base_url()."assets/layout/"?>/js/jquery.fancybox.min.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<?php echo base_url()."assets/layout/"?>js/custom.min.js?<?php echo time(); ?>"></script>
 <script src="<?php echo base_url()."assets/layout/"?>js/update.js?<?php echo time(); ?>"></script>

@@ -29,7 +29,7 @@
 
 
 
-                <td><a class="additem" href="<?php echo base_url('porder/additems')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "600px"}}}'>Add Items</a> </td>
+                <td><a class="additem" href="<?php echo base_url('porder/additems')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "80%","height":"90%"}}}'>Add Items</a> </td>
             </tr>
            <?php endforeach;?>
 

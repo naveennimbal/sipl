@@ -101,20 +101,24 @@ class Porder extends CI_Controller {
 
     public function additems($poID){
 
-        echo "dskjfndksj"; exit;
 
-        $vendorId = $_POST['vendorID'];
-        //$vendorId = 1;
+        if($_POST){
+            //rint_r($_POST); exit;
 
-        $banks = $this->Porder_model->getVendorBanks($vendorId);
-        $bankArr = array();
+            
 
-        foreach ($banks as $bank) {
-            $bankArr[] = $bank;
-            //$bankArr['bank_name'][] = $bank->bank_name;
+
+        } else {
+
+
+            $poDetail = $this->Porder_model->getOrderDetails($poID);
+
+            //var_dump($poDetails); exit;
+
+            $this->load->view('po/items.php', array("podetail" => $poDetail));
+
+            //echo json_encode($bankArr); exit;
         }
-
-        echo json_encode($bankArr); exit;
 
     }
 

@@ -43,7 +43,7 @@ $(document).ready(function(){
        }
 
 
-    $('#podate').datepicker();
+    //$('#podate').datepicker();
 
     $("#vendor").change(function(){
             vendorId =$(this).val();
@@ -75,15 +75,103 @@ $(document).ready(function(){
 
 
 
-    $(".additem").fancybox({
-        'width'				: '75%',
-        'height'			: '75%',
-        'autoScale'			: false,
-        'transitionIn'		: 'none',
-        'transitionOut'		: 'none',
-        'type'				: 'iframe'
+    (function( $ ){
+        $.fn.addItem = function() {
+
+
+                itemHtml= '<div class="form-row">\n' +
+                    '                    <div class="form-group col-md-3">\n' +
+                    '\n' +
+                    '                        <label for="inputAddress">Part Number</label>\n' +
+                    '\n' +
+                    '                        <input type="text" class="form-control" id="inputAddress" name="part_number[]" placeholder="">\n' +
+                    '\n' +
+                    '                    </div>\n' +
+                    '                    <div class="form-group  col-md-6">\n' +
+                    '                        <label for="inputAddress2">Part Name </label>\n' +
+                    '                        <input type="text" class="form-control" id="inputAddress2" name="part_name[]" placeholder="">\n' +
+                    '                    </div>\n' +
+                    '\n' +
+                    '                    <div class="form-group  col-md-1">\n' +
+                    '                        <label for="inputAddress2">Quantity </label>\n' +
+                    '                        <input type="text" class="form-control" id="inputAddress2" name="quantity[]" placeholder="">\n' +
+                    '                    </div>\n' +
+                    '\n' +
+                    '                    <div class="form-group  col-md-1">\n' +
+                    '                        <label for="inputAddress2">Price </label>\n' +
+                    '                        <input type="text" class="form-control" id="inputAddress2" name="price[]" placeholder="">\n' +
+                    '                    </div>\n' +
+                    '\n' +
+                    '                    <div class="form-group  col-md-1">\n' +
+                    '                        <label for="inputAddress2">&nbsp;Remove </label>\n' +
+                    '                        <a class="btn btn-danger removeItemBtn" ><span class="glyphicon glyphicon-minus-sign"></span> Remove</a>\n' +
+                    '                    </div>\n' +
+                    '\n' +
+                    '                </div>';
+
+
+
+
+            $("#itemRow").append(itemHtml);
+
+        };
+    })( jQuery );
+
+
+    (function( $ ){
+        $.fn.removeItem = function(ele) {
+            //alert("dfds");
+            //event.stopPropagation();
+            //console.log($(ele).html())
+            $(ele).parent().parent().remove();
+
+        };
+    })( jQuery );
+
+
+
+
+    $("#addItemBtn").click(function () {
+        $.fn.addItem();
     });
 
+    //$("a").click(function () {
+    //    console.log(this)
+    //})
+
+    $(document).on("click", 'a.removeItemBtn', function(){
+       // alert("sdsad");
+        $.fn.removeItem(this);
+    })
+
+    $(document).on("click", '#submitItemForm', function(eve){
+
+        $.ajax({
+            type: 'post',
+            url: 'porder/additems',
+            data: $('form').serialize(),
+            success: function (xhr) {
+                alert('form was submitted');
+                console.log(xhr);
+            }
+        });
+
+            return false;
+
+    })
 
 
 })
+
+/*var element;
+
+function aaa(ele){
+
+
+    element = ele;
+   // $('.removeItemBtn').preventDefault();
+    //alert($(ele).parent('div.form-row'));
+    $(ele).parent().parent()
+    console.log($(ele).parent().parent());
+}
+*/

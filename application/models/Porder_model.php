@@ -53,4 +53,16 @@ class Porder_model  extends CI_Model  {
 
     }
 
+
+    public function getOrderDetails($poid){
+
+        $query=$this->db->query("select * from purchase_order_master  where id = $poid" );
+        $row = $query->row();
+        // var_dump($numrows); exit();
+        //$result = $query->result();
+
+        return $row;
+
+    }
+
 }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php
+//echo "<pre>";
+$userData = $this->session->userdata("user");
+//var_dump($userData->name); exit;
+
+?>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <!-- Bootstrap Core CSS -->
+    <link href="<?php echo base_url()."assets/layout/"?>bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href="<?php echo base_url()."assets/layout/"?>css/style.css" rel="stylesheet">
+
+    <!-- color CSS -->
+    <link href="<?php echo base_url()."assets/layout/"?>css/colors/default.css" id="theme" rel="stylesheet">
+    <script type="application/javascript">
+        window.baseurl ="<?php echo base_url()?>";
+    </script>
+
+
+</head>
+
+<body class="fix-header">
+
+<div id="wrapper">
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3 class="box-title">Items of Purchase Order <span style="color: #ff430d; font-weight: bold"><?php echo $podetail->po_no?></span></h3> </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group  col-md-10">
+
+                </div>
+
+                <div class="form-group  col-md-2">
+                    <button class="btn btn-success" id="addItemBtn"><span class="glyphicon glyphicon-plus-sign"></span> Add Items</button>
+                </div>
+            </div>
+
+
+    <form id="itemform" method="post">
+            <div id="itemRow">
+
+                <input type="hidden" name="poid" value="<?php echo $podetail->id?>">
+                <!--<div class="form-row">
+                    <div class="form-group col-md-3">
+
+                        <label for="inputAddress">Part Number</label>
+
+                        <input type="text" class="form-control" id="inputAddress" name="part_number[]" placeholder="">
+
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label for="inputAddress2">Part Name </label>
+                        <input type="text" class="form-control" id="inputAddress2" name="part_name[]" placeholder="">
+                    </div>
+
+                    <div class="form-group  col-md-1">
+                        <label for="inputAddress2">Quantity </label>
+                        <input type="text" class="form-control" id="inputAddress2" name="quantity[]" placeholder="">
+                    </div>
+
+                    <div class="form-group  col-md-1">
+                        <label for="inputAddress2">Price </label>
+                        <input type="text" class="form-control" id="inputAddress2" name="price[]" placeholder="">
+                    </div>
+
+                    <div class="form-group  col-md-1">
+                        <label for="inputAddress2">&nbsp;Remove </label>
+                        <button class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</button>
+                    </div>
+
+                </div> -->
+
+
+
+
+
+
+
+            </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-10"></div>
+            <div class="form-group col-md-2">
+
+
+
+                <input type="submit" class="btn btn-default" id="submitItemForm" value="Add item to Order">
+
+            </div>
+        </div>
+
+            </div>
+    </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+</div>
+
+<script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script src="<?php echo base_url()."assets/layout/"?>js/update.js?<?php echo time(); ?>"></script>
+
+</body>
+
+</html>
