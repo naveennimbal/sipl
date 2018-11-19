@@ -57,6 +57,48 @@ $userData = $this->session->userdata("user");
             <div id="itemRow">
 
                 <input type="hidden" name="poid" value="<?php echo $podetail->id?>">
+
+                <?php
+                if(count($transaction)>0){
+                    foreach ($transaction as $trans ) {
+
+                        //var_dump($trans); exit;
+                        ?>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+
+                                <label for="inputAddress">Part Number</label>
+
+                                <input type="text" class="form-control" id="inputAddress" name="part_number[]" value="<?php echo $trans->part_no?>">
+
+                            </div>
+                            <div class="form-group  col-md-6">
+                                <label for="inputAddress2">Part Name </label>
+                                <input type="text" class="form-control" id="inputAddress2" name="part_name[]" value="<?php echo $trans->part_name?>">
+                            </div>
+
+                            <div class="form-group  col-md-1">
+                                <label for="inputAddress2">Quantity </label>
+                                <input type="text" class="form-control" id="inputAddress2" name="quantity[]" value="<?php echo $trans->quantity?>">
+                            </div>
+
+                            <div class="form-group  col-md-1">
+                                <label for="inputAddress2">Price </label>
+                                <input type="text" class="form-control" id="inputAddress2" name="price[]" value="<?php echo $trans->price?>">
+                            </div>
+
+                            <div class="form-group  col-md-1">
+                                <label for="inputAddress2">&nbsp;Remove </label>
+                                <button class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</button>
+                            </div>
+
+                        </div>
+
+                        <?php
+                    }
+                }
+                ?>
+
                 <!--<div class="form-row">
                     <div class="form-group col-md-3">
 

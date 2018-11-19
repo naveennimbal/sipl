@@ -151,8 +151,16 @@ $(document).ready(function(){
             url: 'porder/additems',
             data: $('form').serialize(),
             success: function (xhr) {
-                alert('form was submitted');
-                console.log(xhr);
+               // console.log(xhr);
+                data = $.parseJSON(xhr)
+                if (data.result=="SUCCESS"){
+                    alert("Item added successfully");
+                    $.fancybox.close();
+                }
+                if (data.result=="DELETESUCCESS"){
+                    alert("Item removed successfully");
+                    $.fancybox.close();
+                }
             }
         });
 

@@ -103,25 +103,69 @@ class Porder extends CI_Controller {
 
 
         if($_POST){
-            //rint_r($_POST); exit;
+            //print_r($_POST); exit;
 
-            
+
+            $res= array();
+            $res['result']= "FAIL";
+            $po_id = $_POST['poid'];
+            $this->Porder_model->deletePreviousOrderItems($po_id);
+            $res['result']= "DELETESUCCESS";
+            $x = 0;
+            if(isset($_POST['part_number'])) {
+                $res['result']= "FAIL";
+                for ($i = 0; $i < count($_POST['part_number']); $i++) {
+                    //foreach ($_POST as $data=>$v){
+
+                    //var_dump($data);
+                    $data['po_id'] = $po_id;
+                    $data['part_no'] = $_POST['part_number'][$i];
+                    $data['part_name'] = $_POST['part_name'][$i];
+                    $data['quantity'] = $_POST['quantity'][$i];
+                    $data['price'] = $_POST['price'][$i];
+
+                    $amount = ($_POST['quantity'][$i] * $_POST['price'][$i]);
+                    $data['amount'] = $amount;
+
+
+                    $this->Porder_model->addOrderItems($data);
+                    // echo "part_number= $part_no-----part_name=$part_name-------quan= $quantity--------Price= $price\n";
+                    if ($x < count(count($_POST['part_number']))) {
+                        $res['result'] = "SUCCESS";
+                    }
+                    $x++;
+
+                }
+            }
+
+            echo json_encode($res);
+            return;
 
 
         } else {
 
 
             $poDetail = $this->Porder_model->getOrderDetails($poID);
+            $transactions = $this->Porder_model->getOrderTransactions($poID);
 
             //var_dump($poDetails); exit;
 
-            $this->load->view('po/items.php', array("podetail" => $poDetail));
+            $this->load->view('po/items.php', array("podetail" => $poDetail,"transaction"=>$transactions));
 
             //echo json_encode($bankArr); exit;
         }
 
     }
 
+
+    public function poview($po_id){
+
+        $poDetail = $this->Porder_model->getOrderDetails($po_id);
+        $transactions = $this->Porder_model->getOrderTransactions($po_id);
+
+        $this->load->view('po/poview.php', array("podetail" => $poDetail,"transaction"=>$transactions));
+
+    }
 
 
 

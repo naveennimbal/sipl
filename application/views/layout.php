@@ -173,7 +173,7 @@ $userData = $this->session->userdata("user");
                     <ul class="nav nav-second-level collapse"  style="">               
                 
                 <li>
-                    <a href="<?php echo site_url('main/purchaseorder')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Purchase Order</a>
+                    <a href="<?php echo site_url('porder')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Purchase Order</a>
                 </li>
 
                         <li>
