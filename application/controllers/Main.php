@@ -23,23 +23,14 @@ class Main extends CI_Controller
         $this->load->helper('url');
         $this->load->model('users_model');
         $this->load->model('permissions_model');
+        $this->load->model('material_model');
         /* ------------------ */
+        $this->load->library('form_validation');
 
         $this->load->library('grocery_CRUD');
 
-        //echo "<pre>";
-        //var_dump($this->uri->segment(2)); exit;
-
 
     }
-
-
-    public function index(){
-        $this->checkLogin();
-    }
-
-
-
 
     public function dashboard()
     {
@@ -50,16 +41,16 @@ class Main extends CI_Controller
 
             $tables = array();
             $tables['Company'] = "company_master";
-            $tables['Material'] = "material_master";
-            $tables['UOM'] = "uom_master";
             $tables['Vehicle'] = "vehicle_master";
             $tables['Vehicle Policy'] = "vehicle_policy_master";
-            // $tables['Vehicle Policy'] = "vehicle_policy_master";
             $tables['Vehicle Taxation'] = "vehicle_tax_master";
             $tables['Vendor'] = "vendor_master";
             $tables['Vendor Bank'] = "vendor_bank_master";
-            $tables['Property'] = "property_master";
-            $tables['Project'] = "project_master";
+            $tables['Vendor GST'] = "vendor_gst";
+            $tables['Project Activity'] = "activity_description_master";
+            $tables['Project'] = "project_master";            
+            $tables['Project Scope'] = "project_scope";
+            $tables['Property'] = "property_master";           
             $tables['Personal Expense'] = "personal_expense_master";
 
 
@@ -76,6 +67,115 @@ class Main extends CI_Controller
 
     }
 
+    public function policy_provider()
+    {
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('policy_provider')
+            ->set_subject('Policy Provider Details')
+            ->columns("name","description")
+            ->display_as('name','Policy Company Name')
+            ->display_as('description','Description');          
+            
+        $crud->fields("name","description");
+        $crud->required_fields("name","description");        
+        
+        //$crud->set_relation('name','policy_','name');    
+        
+        $output = $crud->render();
+
+        $output->func = "Policy Provider Master";
+
+        $this->load->view('layout.php',$output);
+    }
+    
+    public function employee()
+    {
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('employee_master')
+            ->set_subject('Employee Details')
+            ->columns("name","address","mobile","blood_group")
+            ->display_as('name','Employee Name')
+            ->display_as('address','Address')
+            ->display_as('mobile','Mobile')
+            ->display_as('blood_group','Blood Group');
+          
+            
+        $crud->fields("name","address","mobile","blood_group");
+        $crud->required_fields("name","address","mobile");        
+        $output = $crud->render();
+
+        $output->func = "Employee Master";
+
+        $this->load->view('layout.php',$output);
+    }
+    
+    public function property_rent()
+    {
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('property_transaction')
+            ->set_subject('Property Rent')
+            ->columns("property_id","vendor_id","bill_no","invoice_date","description","total_period","amount")
+            
+            ->display_as('property_id','Property Name')
+            ->display_as('vendor_id','Tennant Name')
+            ->display_as('bill_no','Bill No.')
+            ->display_as('invoice_date','Invoice Date')
+            ->display_as('description','Particulars')
+            ->display_as('total_period','Month')
+            ->display_as('amount','Amount');            
+	
+            
+        $crud->fields("property_id","vendor_id","bill_no","invoice_date","description","total_period","amount");
+               
+        $crud->required_fields("property_id","vednor_id","description","invoice_date","bill_no","total_period","amount");
+
+        $crud->set_relation('vendor_id','vendor_master','name');    
+        $crud->set_relation('property_id','property_master','name');    
+
+        
+        $output = $crud->render();
+        $output->func = "Property Rent Details";
+
+        $this->load->view('layout.php',$output);
+    }
+    
+    public function property_electricity()
+    {
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('property_transaction')
+            ->set_subject('Electricity Rent Invoice')
+            ->columns("property_id","vendor_id","bill_no","invoice_date","description","total_period","amount")
+            
+            ->display_as('property_id','Property Name')
+            ->display_as('vendor_id','Tennant Name')
+            ->display_as('bill_no','Bill No.')
+            ->display_as('invoice_date','Invoice Date')
+            ->display_as('description','Particulars')
+            ->display_as('total_period','Month')
+            ->display_as('amount','Amount');            
+	
+            
+        $crud->fields("property_id","vendor_id","bill_no","invoice_date","description","total_period","amount");
+               
+        $crud->required_fields("property_id","vendor_id","description","invoice_date","bill_no","total_period","amount");
+        
+        $crud->set_relation('vendor_id','vendor_master','name');    
+        $crud->set_relation('property_id','property_master','name');    
+        
+        $output = $crud->render();
+        $output->func = "Electricity Rent Details";
+
+        $this->load->view('layout.php',$output);
+    }
+    
     private function checkPermission($tableName){
         $userData = $this->session->userdata("user");
         $res = $this->permissions_model->checkPermission($userData->id,$tableName);
@@ -120,6 +220,67 @@ class Main extends CI_Controller
         die();
     }
 
+
+    public function quotations()
+    {
+    	    $crud = new grocery_CRUD();
+        	$crud->set_table("requirement_master")
+            ->set_subject('Quotation/Item Requirement')
+            ->columns("project_id","quotation_type","proj_date","part_no","quantity","amount","status","attachment")
+            
+            ->display_as('project_id','Project Name')
+            ->display_as('quotation_type','Type')
+            ->display_as('proj_date','Date')
+            ->display_as('part_no','Material Name')
+            ->display_as('quantity','Quantity')
+            ->display_as('amount','Amount')
+            ->display_as('status','Status')
+            ->display_as('attachment','Attachment');            
+	
+        $crud->fields("project_id","quotation_type","proj_date","part_no","quantity","amount","status","attachment");
+        $crud->required_fields("project_id","quotation_type","proj_date","part_no","quantity","amount","status");
+
+		$crud->set_relation('project_id','project_master','name');                
+		
+		$crud->set_relation('quotation_type','quotation_type','name');
+		
+		$crud->set_relation('part_no','material_master','item');
+		
+		$crud->set_field_upload('attachment','assets/uploads/files');
+		        
+        $output = $crud->render();
+        $output->func = "Quotation/Item Requirement Master";
+
+        $this->load->view('layout.php',$output);
+    }
+    
+public function vendorgst()
+{
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('vendor_gst')
+            ->set_subject('Vendor State GST Details')
+            ->columns("vendor_id","state_id","address","gst")
+            
+            ->display_as('vendor_id','Vendor Name')
+            ->display_as('state_id','State')
+            ->display_as('address','Address')
+            ->display_as('gst','GST No.');            
+	
+        $crud->fields("vendor_id","state_id","address","gst");
+        $crud->required_fields("vendor_id","state_id","address","gst");           
+        
+        $crud->set_relation('vendor_id','vendor_master','name');    
+        $crud->set_relation('state_id','state_master','state');    
+
+                
+        $output = $crud->render();
+        $output->func = "Vendor State GST Master";
+
+        $this->load->view('layout.php',$output);	
+	
+}
+
 public function purchaseorder()
 {
         $crud = new grocery_CRUD();
@@ -140,16 +301,15 @@ public function purchaseorder()
         $crud->required_fields("company_id","vendor_id","vendor_bank_id","po_no","po_date","vendor_ref_no","site_address");           
         
         $crud->set_relation('vendor_id','vendor_master','name');    
-        $crud->set_relation('vendor_bank_id','vendor_bank_master','bank_name');
-
+        $crud->set_relation('vendor_bank_id','vendor_bank_master','bank_name');    
 
                 
         $output = $crud->render();
         $output->func = "Purchase Order Master";
 
-        $this->load->view('layout.php',$output);	
-	
-}    
+        $this->load->view('layout.php',$output);		
+}
+    
 public function machinedpr()
     {
         $crud = new grocery_CRUD();
@@ -161,7 +321,57 @@ public function projectdpr()
         $crud = new grocery_CRUD();
     	
 	}    
-		
+	
+public function projectactivity()
+    {
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('activity_description_master')
+            ->set_subject('Project Activity Description Details')
+            ->columns("description")
+            
+            ->display_as('description','Activity Description');            
+	
+        $crud->fields("description");               
+        $crud->required_fields("description");
+                
+        $output = $crud->render();
+        $output->func = "Project Activity Description Master";
+
+        $this->load->view('layout.php',$output);
+    }
+    	
+public function projectscope()
+    {
+
+        $crud = new grocery_CRUD();
+
+        $crud->set_table('project_scope')
+            ->set_subject('Project Scope Details')
+            ->columns("project_id","description_id","soq_no","area","uom_id","soq")
+            
+            ->display_as('project_id','Project Name')
+            ->display_as('soq_no','SOQ No')
+            ->display_as('description_id','Activity Description')
+            ->display_as('area','Area')
+            ->display_as('uom_id','UOM')
+            ->display_as('soq','SOQ');            
+	
+        $crud->fields("project_id","description_id","soq_no","area","uom_id","soq");               
+        $crud->required_fields("project_id","description_id","soq_no","area","uom_id","soq");
+        
+        $crud->set_relation('project_id','project_master','name');
+        $crud->set_relation('uom_id','uom_master','uom');
+        $crud->set_relation('description_id','activity_description_master','description');
+
+                
+        $output = $crud->render();
+        $output->func = "Project Scope Master";
+
+        $this->load->view('layout.php',$output);
+    }
+    
     public function project()
     {
 
@@ -169,25 +379,20 @@ public function projectdpr()
 
         $crud->set_table('project_master')
             ->set_subject('Project Details')
-            ->columns("name","address","stateid","proj_incharge","mobile","area","uomid","soq")
+            ->columns("name","address","stateid","nature_of_work","employee_id","po_no")
             
             ->display_as('name','Project Name')
             ->display_as('address','Site Address')
-            ->display_as('stateid','Site Location')
-            ->display_as('proj_incharge','Project Incharge')
-            ->display_as('mobile','Mobile No.')
-            ->display_as('area','Site Area')
-            ->display_as('uomid','Measurement Unit')
-            ->display_as('soq','SOQ');            
+            ->display_as('stateid','State')
+            ->display_as('nature_of_work','Nature Of Work')
+            ->display_as('employee_id','Project Incharge')
+            ->display_as('po_no','PO. No.');            
 	
-        $crud->fields("name","address","stateid","proj_incharge","mobile","area","uomid","soq");               
-        $crud->required_fields("name","address","stateid","proj_incharge","mobile","area","uomid","soq");
+        $crud->fields("name","address","stateid","nature_of_work","employee_id","po_no");               
+        $crud->required_fields("name","address","stateid","nature_of_work","employee_id","po_no");
         
-        $crud->set_relation('uomid','uom_master','uom');
+        $crud->set_relation('employee_id','employee_master','name');
         $crud->set_relation('stateid','state_master','state');
-        
-        //$crud->callback_add_field('reminder',array($this,'add_checkbox_expense')); 
-        //$crud->callback_edit_field('reminder',array($this,'edit_checkbox_expense'));                
                 
         $output = $crud->render();
         $output->func = "Project Master";
@@ -195,37 +400,7 @@ public function projectdpr()
         $this->load->view('layout.php',$output);
     }
         
-    public function Quotations()
-    {
-
-        $crud = new grocery_CRUD();
-
-        $crud->set_table('quotation_master')
-            ->set_subject('Quotation Item/Requirements')
-            ->columns("project_id","type","to_location","project_date","description","remarks","attachment")
-            
-            ->display_as('project_id','Project Name')
-            ->display_as('type','Type')
-            ->display_as('project_date','Date')
-            ->display_as('description','Description')
-            ->display_as('remarks','Remarks')
-            ->display_as('attachment','Attachment');            
-	
-        $crud->fields("project_id","type","to_location","project_date","description","remarks","attachment");               
-        $crud->required_fields("project_id","type","to_location","project_date");
-        
-        $crud->set_relation('project_id','project_master','name');
-        $crud->set_relation('type','quotation_type','name');
-        
-        //$crud->callback_add_field('reminder',array($this,'add_checkbox_expense')); 
-        //$crud->callback_edit_field('reminder',array($this,'edit_checkbox_expense'));                
-                
-        $output = $crud->render();
-        $output->func = "Quotation Item/Requirement Details";
-
-        $this->load->view('layout.php',$output);
-    }
-        
+       
     public function vehiclemovement()
     {
 
@@ -243,8 +418,7 @@ public function projectdpr()
         $crud->fields("vehicle_id","from_location","to_location","start_date");               
         $crud->required_fields("vehicle_id","from_location","to_location","start_date");
         $crud->set_relation('vehicle_id','vehicle_master','vehicle_no');
-        //$crud->callback_add_field('reminder',array($this,'add_checkbox_expense')); 
-        //$crud->callback_edit_field('reminder',array($this,'edit_checkbox_expense'));                
+
                 
         $output = $crud->render();
         $output->func = "Vehicle Movement Master";
@@ -258,17 +432,20 @@ public function projectdpr()
         $crud = new grocery_CRUD();
 
         $crud->set_table('personal_expense_master')
-            ->set_subject('Pers. Expense Master')
-            ->columns("user_id","phoneno","biling_cycle_from","biling_cycle_to","reminder")
+            ->set_subject('Personal Expense Details')
+            ->columns("employee_id","phoneno","biling_cycle_from","biling_cycle_to","reminder")
             
-            ->display_as('user_id','Employee Name')
+            ->display_as('employee_id','Employee Name')
             ->display_as('phoneno','Mobile')
             ->display_as('biling_cycle_from','Billing Cycle From')
             ->display_as('biling_cycle_to','Billing Cycle To')
             ->display_as('reminder','Reminder');            
 	
-        $crud->fields("user_id","phoneno","biling_cycle_from","biling_cycle_to","reminder");               
-        $crud->required_fields("user_id","phoneno","biling_cycle_from","biling_cycle_to","reminder");
+        $crud->fields("employee_id","phoneno","biling_cycle_from","biling_cycle_to","reminder");               
+        $crud->required_fields("employee_id","phoneno","biling_cycle_from","biling_cycle_to","reminder");
+        
+        $crud->set_relation('employee_id','employee_master','name');    
+        
         //$crud->callback_add_field('reminder',array($this,'add_checkbox_expense'));
         //$crud->callback_edit_field('reminder',array($this,'edit_checkbox_expense'));
                 
@@ -284,8 +461,8 @@ public function projectdpr()
         $crud = new grocery_CRUD();
 
         $crud->set_table('property_master')
-            ->set_subject('Properties Master')
-            ->columns("name","address","elec_biling_cycle_from","elec_biling_cycle_to","water_biling_cycle_from","water_biling_cycle_to","htax_biling_cycle_from","htax_biling_cycle_from","rented","reminder")
+            ->set_subject('Properties Details')
+            ->columns("name","address","elec_biling_cycle_from","elec_biling_cycle_to","water_biling_cycle_from","water_biling_cycle_to","htax_biling_cycle_from","htax_biling_cycle_to","reminder","rented","lease_from","lease_to","lease_escalation","percent_increment","hsn_code","amount")
             
             ->display_as('name','Property Name')
             ->display_as('address','Property Address')
@@ -295,27 +472,41 @@ public function projectdpr()
             ->display_as('water_biling_cycle_to','Water Billing Cycle To')
             ->display_as('htax_biling_cycle_from','H. Tax Billing Cycle From')
             ->display_as('htax_biling_cycle_to','H. Tax Billing Cycle To')           
+            ->display_as('reminder','Reminder')
             ->display_as('rented','Rented')
-            ->display_as('reminder','Reminder');            
+            ->display_as('lease_from','Lease Valid From')
+            ->display_as('lease_to','Lease Valid To')
+            ->display_as('lease_escalation','Lease Escalation')
+            ->display_as('percent_increment','Rent Increment(%)')
+            ->display_as('hsn_code','HSN/SAC Code')
+            ->display_as('amount','Amount');            
 	
             
-        $crud->fields("name","address","elec_biling_cycle_from","elec_biling_cycle_to","water_biling_cycle_from","water_biling_cycle_to","htax_biling_cycle_from","htax_biling_cycle_from","rented","reminder");
+        $crud->fields("name","address","elec_biling_cycle_from","elec_biling_cycle_to","water_biling_cycle_from","water_biling_cycle_to","htax_biling_cycle_from","htax_biling_cycle_to","reminder","rented","lease_from","lease_to","lease_escalation","percent_increment","hsn_code","amount");
                
-        $crud->required_fields("name","address","elec_biling_cycle_from","elec_biling_cycle_to","water_biling_cycle_from","water_biling_cycle_to","htax_biling_cycle_from","htax_biling_cycle_from","rented","reminder");
+        $crud->required_fields("name","address","elec_biling_cycle_from","elec_biling_cycle_to","water_biling_cycle_from","water_biling_cycle_to","htax_biling_cycle_from","htax_biling_cycle_to","reminder","rented");
         
-        /*$crud->callback_add_field('rented',array($this,'add_checkbox_rented'));
-        $crud->callback_edit_field('rented',array($this,'edit_checkbox_rented'));                
-                
-        $crud->callback_add_field('reminder',array($this,'add_checkbox_reminder')); 
-        $crud->callback_edit_field('reminder',array($this,'edit_checkbox_reminder'));                
-                        
-        */
+		$crud->set_rules('amount','Amount','callback_validate_money');
+		$crud->set_rules('percent_increment','Rent Increment(%)','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
+
+
         $output = $crud->render();
         $output->func = "Property Master";
 
         $this->load->view('layout.php',$output);
     }
-        
+ 
+public function validate_money ($input) 
+{
+    if(preg_match('/^[0-9]*\.?[0-9]+$/', $input)){
+        return true;
+    } 
+    else 
+    {
+        $this->form_validation->set_message('validate_money','Please enter a valid Amount!');
+        return false;
+    }
+}
     public function vehicletax()
     {
 
@@ -323,19 +514,20 @@ public function projectdpr()
 
         $crud->set_table('vehicle_tax_master')
             ->set_subject('Vehicle Taxes')
-            ->columns("vehicle_id","taxtype_id","date_from","date_to","amount_paid","amount_received","attachment")
+            ->columns("vehicle_id","taxtype_id","date_from","date_to","amount_paid","amount_received","reminder","attachment")
             ->display_as('vehicle_id','Vehicle Name')
             ->display_as('taxtype_id','Tax Type')
             ->display_as('date_from','Date From')
             ->display_as('date_to','Date To')
             ->display_as('amount_paid','Amount Paid')
             ->display_as('amount_received','Receipt Received')
+            ->display_as('reminder','Reminder')
             ->display_as('attachment','Tax Receipt');
 	
             
-        $crud->fields("vehicle_id","taxtype_id","date_from","date_to","amount_paid","amount_received","attachment");
+        $crud->fields("vehicle_id","taxtype_id","date_from","date_to","amount_paid","amount_received","reminder","attachment");
         $crud->set_rules('amount_paid','Amount Paid','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
-        $crud->required_fields("vehicle_id","taxtype_id","date_from","date_to","amount_paid","amount_received");
+        $crud->required_fields("vehicle_id","taxtype_id","date_from","date_to","amount_paid","reminder","amount_received","attachment");
         
         $crud->set_relation('vehicle_id','vehicle_master','vehicle_no');
         $crud->set_relation('taxtype_id','tax_type','name');
@@ -379,22 +571,37 @@ public function projectdpr()
     public function vendor()
     {
 
+        $materialArray = array();
+
+        $materials = $this->material_model->getMaterials();
+
+        foreach ($materials as $material){
+            $materialArray[$material->id] = $material->item;
+        }
+
+
+
         $crud = new grocery_CRUD();
 
         $crud->set_table('vendor_master')
             ->set_subject('Vendor Details')
-            ->columns("name","code","address","contact_person","tin_no","gst_no")
-            ->display_as('name','Vendor Name')
-            ->display_as('code','Vendor Code')
-            ->display_as('address','Vendor Address')
+            ->columns("name","code","address","material_id","place_of_supply","invoice_submission","contact_person","tin_no","gst_no")
+            ->display_as('name','Name')
+            ->display_as('code','Code')
+            ->display_as('address','Address')
+            ->display_as('material_id','Material Name')
+            ->display_as('place_of_supply','Place Of Supply')
+            ->display_as('invoice_submission','Invoice Submission')
             ->display_as('contact_person','Contact Person')
             ->display_as('tin_no','TIN No.')
             ->display_as('gst_no','GST No.');
             
-        $crud->fields("name","code","address","contact_person","tin_no","gst_no");
-        $crud->required_fields("name","code","address","contact_person","tin_no","gst_no");
+        $crud->fields("name","code","address","material_id","place_of_supply","invoice_submission","contact_person","tin_no","gst_no");
+        $crud->required_fields("name","code","address","place_of_supply","invoice_submission","contact_person","tin_no","gst_no");
+
+        $crud->field_type('material_id','multiselect',$materialArray);
         
-        //$crud->set_relation('vehicle_id','vehicle_master','vehicle_no');
+        //$crud->set_relation('material_id','material_master','item');
         
         $output = $crud->render();
 
@@ -434,9 +641,10 @@ public function projectdpr()
 
         $crud->set_table('company_master')
             ->set_subject('Company Details')
-            ->columns("name","address","telephone","contact_person","contact_mobile","gst_no","pan_no","logo")
+            ->columns("name","address","state_id","telephone","contact_person","contact_mobile","gst_no","pan_no","logo")
             ->display_as('name','Name')
             ->display_as('address','Address')
+            ->display_as('state_id','State')
             ->display_as('telephone','Telephone')
             ->display_as('gst_no','GST No.')
              ->display_as('pan_no','PAN No.')
@@ -444,10 +652,13 @@ public function projectdpr()
             ->display_as('contact_person','Contact Person')
             ->display_as('contact_mobile','Contact Mobile');
 
-        $crud->fields('name','address','telephone','contact_person','contact_mobile','gst_no',"pan_no",'logo');
+        $crud->fields('name','address','state_id','telephone','contact_person','contact_mobile','gst_no',"pan_no",'logo');
         $crud->set_field_upload('logo','assets/uploads/files');
+        
+        $crud->set_relation('state_id','state_master','state');
+        
         //$crud->required_fields('firstName','lastName');
-        $crud->required_fields('name','address','mobile','gst_no','pan_no');
+        $crud->required_fields('name','address','state_id','mobile','gst_no','pan_no');
         $output = $crud->render();
 
         $output->func = "Company Master";
@@ -462,24 +673,25 @@ public function projectdpr()
 
         $crud->set_table('vehicle_policy_master')
             ->set_subject('Vehicle Policy')
-            ->columns("companyname","vehicle_id","date_from","date_to","amount","assigned_to","policy_copy")
+            ->columns("companyname","vehicle_id","date_from","date_to","amount","employee_id","policy_copy")
             ->display_as('companyname','Policy Company Name')
             ->display_as('vehicle_id','Vehicle No.')
             ->display_as('date_from','Vaid From')
             ->display_as('date_to','Valid To')
             ->display_as('amount','amount')
-            ->display_as('assigned_to','Vehicle Assigned To')
+            ->display_as('employee_id','Employee Name')
            // ->display_as('sold','Is Sold')
             ->display_as('policy_copy','Policy Copy');
             
             
         $crud->set_field_upload('policy_copy','assets/uploads/files');  
 
-        $crud->fields("companyname","vehicle_id","date_from","date_to","amount","assigned_to","policy_copy");
+        $crud->fields("companyname","vehicle_id","date_from","date_to","amount","employee_id","policy_copy");
         $crud->required_fields("companyname","vehicle_id","date_from","date_to","amount","policy_copy");
-        $crud->set_relation('assigned_to','user_master','name');
+        $crud->set_relation('employee_id','employee_master','name');
         
         $crud->set_relation('vehicle_id','vehicle_master','vehicle_no');
+        $crud->set_relation('companyname','policy_provider','name');
         
         
         $output = $crud->render();
@@ -520,7 +732,7 @@ public function projectdpr()
 
         $crud->set_table('vehicle_master')
             ->set_subject('Vehicle Details')
-            ->columns("vehicle_no","description","reg_authority","make","model","chasis_no","engine_no","permit_type","purchase_date","rc_copy","sold")
+            ->columns("vehicle_no","description","reg_authority","make","model","chasis_no","engine_no","permit_type","purchase_date","project_id","rc_copy","sold")
             ->display_as('vehicle_no','Vehicle No.')
             ->display_as('description','Description')
             ->display_as('reg_authority','Regulatory Authority')
@@ -530,16 +742,19 @@ public function projectdpr()
             ->display_as('engine_no','Engine No.')
             ->display_as('permit_type','Permit Type')            
             ->display_as('purchase_date','Purchase Date')
+            ->display_as('project_id','Project Assigned')
             ->display_as('sold','Sold(Y/N)')
             ->display_as('rc_copy','RC Copy');
             
            $crud->set_field_upload('rc_copy','assets/uploads/files');
 
-        $crud->fields("vehicle_no","description","reg_authority","make","model","chasis_no","engine_no","permit_type","purchase_date","sold","sold_to","address","mobile","sale_date","rc_copy");
+        $crud->fields("vehicle_no","description","reg_authority","make","model","chasis_no","engine_no","permit_type","purchase_date","project_id","sold","sold_to","address","mobile","sale_date","rc_copy");
         //$crud->required_fields('firstName','lastName');
         $crud->set_relation('permit_type','permit_master','permit');
         
-        $crud->required_fields("vehicle_no","description","reg_authority","make","model","chasis_no","engine_no","purchase_date","rc_copy");
+        $crud->set_relation('project_id','project_master','name');
+        
+        $crud->required_fields("vehicle_no","description","reg_authority","make","model","chasis_no","engine_no","purchase_date","project_id","rc_copy");
         
        // $crud->callback_add_field('sold',array($this,'add_checkbox'));
         //$crud->callback_edit_field('sold',array($this,'edit_checkbox'));
@@ -854,7 +1069,7 @@ public function projectdpr()
 
         $user = $this->session->userdata('user');
         if (!isset($user->id)) {
-            redirect("login/index/2");
+            redirect("main/login/2");
         }
 
     }
