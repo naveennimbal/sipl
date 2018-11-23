@@ -18,6 +18,9 @@ class Main extends CI_Controller
     {
         parent::__construct();
 
+
+        $this->checkLogin();
+
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
@@ -391,7 +394,7 @@ public function projectscope()
         $crud->fields("name","address","stateid","nature_of_work","employee_id","po_no");               
         $crud->required_fields("name","address","stateid","nature_of_work","employee_id","po_no");
         
-        $crud->set_relation('employee_id','employee_master','name');
+       return $crud->set_relation('employee_id','employee_master','name');
         $crud->set_relation('stateid','state_master','state');
                 
         $output = $crud->render();
@@ -1069,7 +1072,7 @@ public function validate_money ($input)
 
         $user = $this->session->userdata('user');
         if (!isset($user->id)) {
-            redirect("main/login/2");
+            redirect("login/index/2");
         }
 
     }

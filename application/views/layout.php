@@ -69,18 +69,9 @@ $userData = $this->session->userdata("user");
             <!-- /Logo -->
             <ul class="nav navbar-top-links navbar-right pull-right">
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <b class="hidden-xs"><?php echo ucfirst($userData->name)?></b> <span class="fa fa-angle-double-down"></span> </a>
-                    <ul class="dropdown-menu dropdown-user animated flipInY">
-                        <li>
-                            <div class="dw-user-box">
+                <li>
+                	<a class="profile-pic" href="#"> <b class="hidden-xs"><?php echo ucfirst($userData->name)?></b></a>
 
-                                <div class="u-text">
-                                    <a href="<?php echo base_url("login/logout")?>" class="btn btn-rounded btn-danger btn-sm" style="padding-right: 3em; padding-left: 3em;margin-left: 3em;">Logout</a></div>
-                            </div>
-                        </li>
-
-                    </ul>
                 </li>
             </ul>
         </div>
@@ -129,6 +120,14 @@ $userData = $this->session->userdata("user");
 		                </li>                    
 		                                
                 <li>
+                    <a href="<?php echo site_url('main/employee')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Employee Master</a>
+                </li>
+                
+                <li>
+                    <a href="<?php echo site_url('main/policy_provider')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Policy Provider</a>
+                </li>                
+                
+                <li>
                     <a href="<?php echo site_url('main/uom')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Measurement Unit</a>
                 </li>
                 <li>
@@ -150,12 +149,27 @@ $userData = $this->session->userdata("user");
                         <li>
                             <a href="<?php echo site_url('main/vendor')?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Vendor Master</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo site_url('main/vendorgst')?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Vendor State GST</a>
+                        </li>
+                                                
                         <li>
                             <a href="<?php echo site_url('main/vendorbank')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Vendor Banks</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo site_url('main/projectactivity')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Project Activities</a>
+                        </li>
+                                                
                         <li>
                             <a href="<?php echo site_url('main/project')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Project Master</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo site_url('main/projectscope')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Project Scope</a>
+                        </li>
+                                                
                         <li>
                             <a href="<?php echo site_url('main/property')?>" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Property Master</a>
                         </li>
@@ -172,6 +186,18 @@ $userData = $this->session->userdata("user");
 
                     <ul class="nav nav-second-level collapse"  style="">               
                 
+<!--                <li>
+                    <a href="<?php echo site_url('main/property_rent')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Rent Invoice</a>
+                </li>
+                     
+                <li>
+                    <a href="<?php echo site_url('main/property_electricity')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Electricity Invoice</a>
+                </li> -->
+
+                <li>
+                    <a href="<?php echo site_url('main/quotations')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Quotation Item/Req.</a>
+                </li>                
+                                                                
                 <li>
                     <a href="<?php echo site_url('porder')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Purchase Order</a>
                 </li>
@@ -184,9 +210,7 @@ $userData = $this->session->userdata("user");
                     <a href="<?php echo site_url('main/vehiclemovement')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Vehicle Movement</a>
                 </li>                
 
-                <li>
-                    <a href="<?php echo site_url('main/Quotations')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Quotation Item/Req.</a>
-                </li>                
+
 
                 <li>
                     <a href="<?php echo site_url('main/projectdpr')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Project DPR</a>
@@ -197,16 +221,12 @@ $userData = $this->session->userdata("user");
                 </li>
                                     
                     </ul>
-
                 <li style="margin-top: 2em;">
-                      <div class="u-text">
-                          <a href="<?php echo base_url("login/logout")?>" class="btn btn-rounded btn-danger btn-sm" style="margin-left:1em;color:#FFF;width: 80%;">Logout</a></div>
-                    </div>
+                    <div class="u-text">
+                        <a href="<?php echo base_url("login/logout") ?>" class="btn btn-rounded btn-danger btn-sm"
+                           style="margin-left:1em;color:#FFF;width: 80%;">Logout</a></div>
 
-                </li>
-
-
-            </ul>
+            </li>
 
         </div>
 

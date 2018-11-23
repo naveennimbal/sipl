@@ -6,45 +6,31 @@
 
         <form method="post" action="<?php base_url('porder/add')?>">
             <div class="form-row">
-            
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">P.O. Number</label>
-                    <input type="text" class="form-control" required id="po_no" name="po_no" placeholder="Order Number">
-                </div>
-                            
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">P.O. Date</label>
+                    <label for="inputEmail4">Order Date</label>
                     <input type="text" class="form-control datepicker" required id="podate" name="po_date" placeholder="Order Date">
                 </div>
-
-                
-            </div>                
-
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Order Number</label>
+                    <input type="text" class="form-control" required id="po_no" name="po_no" placeholder="Order Number">
+                </div>
+            </div>
 
             <div class="form-row">
+            <div class="form-group col-md-6">
 
-               <div class="form-group col-md-6">
-                    <label for="inputCompany">Company</label>
-                    <select id="company" class="form-control" name="company">
-                        <option selected>Choose...</option>
+                <label for="inputAddress">Site Address</label>
 
-                        <?php
+                <input type="text" class="form-control" id="inputAddress" name="site_address" placeholder="1234 Main St">
 
-                        foreach($companies as $company){
-                            echo "<option value='".$company->id."'> ".ucfirst($company->name)." </option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                
-               <div class="form-group col-md-6">
-                    <label for="refno">Ref. No</label>
-                    <input type="text" class="form-control" id="refno" name="refno">
-                </div>
-                            
             </div>
-            
-            
+            <div class="form-group  col-md-6">
+                <label for="inputAddress2">Shipping Address </label>
+                <input type="text" class="form-control" id="inputAddress2" name="shipping_address" placeholder="Apartment, studio, or floor">
+            </div>
+            </div>
+
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Vendor</label>
@@ -122,30 +108,16 @@
 
 
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="remark">Particulars</label>
-                    <input type="text" class="form-control" id="remark" name="remarks" placeholder="Particulars if any">
+                <div class="form-group col-md-12">
+                    <label for="remark">Remarks</label>
+                    <input type="text" class="form-control" id="remark" name="remarks" placeholder="Remarks if any">
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="gst">GST Applicable</label>
-                    <select id="vendorgst" name="vendor_gst" class="form-control">
-                        <option selected>Choose...</option>
 
-                    </select>
-                </div>
 
 
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="freight">Frieght</label>
-                    <input type="text" class="form-control" id="freight" name="freight" placeholder="Freight if any">
-                </div>
-
-            </div>
-            
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary">Add Order</button>

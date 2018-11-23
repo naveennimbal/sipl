@@ -14,7 +14,7 @@ $userData = $this->session->userdata("user");
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
+    <title>SIPL Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
@@ -28,15 +28,17 @@ $userData = $this->session->userdata("user");
     <link href="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
     <!-- animation CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>css/animate.css" rel="stylesheet">
+    <link href="<?php echo base_url()."assets/layout/"?>css/icons/linea-icons/linea.css" rel="stylesheet">
+    <link href="<?php echo base_url()."assets/layout/"?>css/icons/material-design-iconic-font/css/materialdesignicons.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>css/colors/default.css" id="theme" rel="stylesheet">
+    <script type="application/javascript">
+        window.baseurl ="<?php echo base_url()?>";
+    </script>
 
-    <?php
-    foreach($css_files as $file): ?>
-        <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-    <?php endforeach; ?>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,11 +51,7 @@ $userData = $this->session->userdata("user");
 <!-- ============================================================== -->
 <!-- Preloader -->
 <!-- ============================================================== -->
-<div class="preloader">
-    <svg class="circular" viewBox="25 25 50 50">
-        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-    </svg>
-</div>
+
 <!-- ============================================================== -->
 <!-- Wrapper -->
 <!-- ============================================================== -->
@@ -65,7 +63,7 @@ $userData = $this->session->userdata("user");
         <div class="navbar-header">
             <div class="top-left-part">
                 <!-- Logo -->
-                <h1>SIPL</h1>
+                <h1 style="color: #170ddf;" align="center">SIPL</h1>
             </div>
             <!-- /Logo -->
             <ul class="nav navbar-top-links navbar-right pull-right">
@@ -98,41 +96,61 @@ $userData = $this->session->userdata("user");
             <div class="sidebar-head">
                 <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
             </div>
-            <ul class="nav" id="side-menu">
+ <ul class="nav" id="side-menu">
                 <li style="padding: 70px 0 0;">
                     <a href="<?php echo site_url('main/dashboard')?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
                 </li>
+                              
+
+
+                    
 
                 <li>
-                    <a href="<?php echo site_url('main/company')?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Company</a>
-                </li>
+
+                    <a href="#" class="waves-effect"> <i class="fa fa-th-list"></i>
+                        <span class="hide-menu"> Masters <span class="fa arrow"></span> </span>
+                    </a>
+
+
+                    <ul class="nav nav-second-level collapse"  style="">
+
+
+		                <li>
+		                    <a href="<?php echo site_url('main/company')?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Company</a>
+		                </li>
+		                <li>
+		                    <a href="<?php echo site_url('main/role')?>" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Roles</a>
+		                </li>
+		                <li>
+		                    <a href="<?php echo site_url('main/user')?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>User</a>
+		                </li>
+		                
+		                 <li>
+		                    <a href="<?php echo site_url('permissions')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Permissions</a>
+		                </li>                    
+		                                
                 <li>
-                    <a href="<?php echo site_url('main/role')?>" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Roles</a>
+                    <a href="<?php echo site_url('main/employee')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Employee Master</a>
                 </li>
+                
                 <li>
-                    <a href="<?php echo site_url('main/user')?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>User</a>
-                </li>
+                    <a href="<?php echo site_url('main/policy_provider')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Policy Provider</a>
+                </li>                
+                                
                 <li>
-                    <a href="<?php echo site_url('main/uom')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>UOM</a>
+                    <a href="<?php echo site_url('main/uom')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Measurement Unit</a>
                 </li>
+                
                 <li>
                     <a href="<?php echo site_url('main/material')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Material</a>
                 </li>
                 <li>
                     <a href="<?php echo site_url('main/state')?>" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>State</a>
                 </li>
-                
                 <li>
-
-                    <a href="#" class="waves-effect"> <i class="fa fa-th-list" data-icon=""></i>
-                    <span class="hide-menu"> Masters <span class="fa arrow"></span> </span>
-                    </a>
-
-                    <ul class="nav nav-second-level collapse" aria-expanded="true" style="">
-
-                        <li>
-                            <a href="<?php echo site_url('main/vehiclemaster')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Vehicle Master</a>
-                        </li>
+                    <a href="<?php echo site_url('main/vehiclemaster')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Vehicle Master</a>
+                </li>
+                
                         <li>
                             <a href="<?php echo site_url('main/policies')?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Vehicle Policies</a>
                         </li>
@@ -142,22 +160,76 @@ $userData = $this->session->userdata("user");
                         <li>
                             <a href="<?php echo site_url('main/vendor')?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Vendor Master</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo site_url('main/vendorgst')?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Vendor State GST</a>
+                        </li>
+                                                
                         <li>
                             <a href="<?php echo site_url('main/vendorbank')?>" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Vendor Banks</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo site_url('main/projectactivity')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Project Activities</a>
+                        </li>
+                                                
                         <li>
                             <a href="<?php echo site_url('main/project')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Project Master</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo site_url('main/projectscope')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Project Scope</a>
+                        </li>
+                                                
                         <li>
                             <a href="<?php echo site_url('main/property')?>" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Property Master</a>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url('main/personalexpense')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Personal Expense Master</a>
-                        </li>
+
 
                     </ul>
 
+                <li>
 
+                    <a href="#" class="waves-effect"> <i class="fa fa-th-list"></i>
+                        <span class="hide-menu"> Transactions <span class="fa arrow"></span> </span>
+                    </a>
+
+
+                    <ul class="nav nav-second-level collapse"  style="">               
+                
+<!--                <li>
+                    <a href="<?php echo site_url('main/property_rent')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Rent Invoice</a>
+                </li>
+                     
+                <li>
+                    <a href="<?php echo site_url('main/property_electricity')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Electricity Invoice</a>
+                </li> -->
+                                
+                <li>
+                    <a href="<?php echo site_url('main/purchaseorder')?>" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Purchase Order</a>
+                </li>
+
+                        <li>
+                            <a href="<?php echo site_url('main/personalexpense')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Personal Expense Master</a>
+                        </li>
+                                                                           
+                <li>
+                    <a href="<?php echo site_url('main/vehiclemovement')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Vehicle Movement</a>
+                </li>                
+
+                <li>
+                    <a href="<?php echo site_url('main/Quotations')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Quotation Item/Req.</a>
+                </li>                
+
+                <li>
+                    <a href="<?php echo site_url('main/projectdpr')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Project DPR</a>
+                </li>                                
+
+                <li>
+                    <a href="<?php echo site_url('main/machinedpr')?>" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Machine DPR</a>
+                </li>
+                                    
+                    </ul>
 
 
             </ul>
@@ -188,58 +260,17 @@ $userData = $this->session->userdata("user");
             <!-- Different data widgets -->
             <!-- ============================================================== -->
             <!-- .row -->
-            <!--<div class="row">
-                <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Total Visit</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">659</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Total Page Views</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash2"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">869</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Unique Visitor</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash3"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">911</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-            <!--/.row -->
-            <!--row -->
-            <!-- /.row -->
 
-            <!-- ============================================================== -->
-            <!-- table -->
-            <!-- ============================================================== -->
+
+
+
+
             <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12">
-                    <div class="white-box">
 
-                        <h3 class="box-title"><?php echo $func ?></h3>
-                        <div class="table-responsive">
+
                             <?php echo $output; ?>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
             <!-- ============================================================== -->
             <!-- chat-listing & recent comments -->
@@ -268,6 +299,7 @@ $userData = $this->session->userdata("user");
 <script src="<?php echo base_url()."assets/layout/"?>js/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
 <script src="<?php echo base_url()."assets/layout/"?>js/waves.js"></script>
+
 <!--Counter js -->
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
@@ -277,12 +309,9 @@ $userData = $this->session->userdata("user");
 <!-- Sparkline chart JavaScript -->
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
 <!-- Custom Theme JavaScript -->
-<script src="<?php echo base_url()."assets/layout/"?>js/custom.min.js"></script>
-<script src="<?php echo base_url()."assets/layout/"?>js/dashboard1.js"></script>
-<script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/toast-master/js/jquery.toast.js">
-    <?php foreach($js_files as $file): ?>
-    <script src="<?php echo $file; ?>"></script>
-<?php endforeach; ?>
-</body>
+<script src="<?php echo base_url()."assets/layout/"?>js/custom.min.js?<?php echo time(); ?>"></script>
+<script src="<?php echo base_url()."assets/layout/"?>js/update.js?<?php echo time(); ?>"></script>
+
+
 
 </html>

@@ -18,6 +18,7 @@ class Porder extends CI_Controller {
     {
         parent::__construct();
 
+
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
@@ -26,6 +27,8 @@ class Porder extends CI_Controller {
         /* ------------------ */
 
         // $this->load->library('grocery_CRUD');
+
+        $this->checkLogin();
 
     }
 
@@ -57,10 +60,23 @@ class Porder extends CI_Controller {
             $data['po_date']= $date;
             $data['vendor_id']  = $_POST['vendor'];
             $data['vendor_bank_id'] = $_POST['vendor_bank'];
-            $data['site_address']  = $_POST['site_address'];
-            $data['ship_to']= $_POST['shipping_address'];
+            //$data['site_address']  = $_POST['site_address'];
+            //$data['ship_to']= $_POST['shipping_address'];
             $data['remarks']= $_POST['remarks'];
+            $data['company_id ']= $_POST['company'];
+            $data['vendor_ref_no ']= $_POST['refno'];
+            $data['tax_id ']= $_POST['vendor_gst'];
+            $data['frieght ']= $_POST['freight'];
+
             $id = $this->Porder_model->addOrder($data);
+
+
+            /*
+             * company  id
+             * refernce no
+             * gst
+             * frieght
+             * */
 
             //var_dump($id);
             redirect('porder');
@@ -69,8 +85,11 @@ class Porder extends CI_Controller {
         } else {
 
             $vendors = $this->Porder_model->getVendors();
+            $companies = $this->Porder_model->getCompanies();
+            //$gsts = $this->Porder_model->getVendorGST();
 
-            $list = $this->load->view('po/add.php', array("vendors" => $vendors), TRUE);
+
+            $list = $this->load->view('po/add.php', array("vendors" => $vendors,"companies"=>$companies ), TRUE);
 
             $this->load->view('dashboard.php', array("output" => $list));
             // $this->load->view('po/index.php',array("msg"=>$msg));
@@ -85,7 +104,7 @@ class Porder extends CI_Controller {
     public function vendorbank(){
 
         $vendorId = $_POST['vendorID'];
-        //$vendorId = 1;
+        //$vendorId = 3;
 
         $banks = $this->Porder_model->getVendorBanks($vendorId);
         $bankArr = array();
@@ -95,7 +114,19 @@ class Porder extends CI_Controller {
             //$bankArr['bank_name'][] = $bank->bank_name;
         }
 
-        echo json_encode($bankArr); exit;
+
+        $gsts = $this->Porder_model->getVendorGST($vendorId);
+        $gstArr = array();
+
+        foreach ($gsts as $gst){
+            //var_dump($gst); exit;
+            $gstArr[] =  $gst;
+        }
+        $result['banks'] = $bankArr;
+        $result['gst'] = $gstArr;
+
+
+        echo json_encode($result); exit;
 
     }
 
@@ -169,7 +200,15 @@ class Porder extends CI_Controller {
 
 
 
+    private function checkLogin()
+    {
 
+        $user = $this->session->userdata('user');
+        if (!isset($user->id)) {
+            redirect("login/index/2");
+        }
+
+    }
 
 
 

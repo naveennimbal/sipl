@@ -64,10 +64,16 @@ $(document).ready(function(){
                 } */
                 var result = "";
 
-                $.each(xhr, function(k, v) {
+                $.each(xhr.banks, function(k, v) {
                    // console.log(k,"this is key")
                    // console.log(v,"this is val")
                    $("#vendorbank").append("<option value='"+v.id+"'>"+v.bank_name+"</option>")
+                });
+
+                $.each(xhr.gst, function(k, v) {
+                    // console.log(k,"this is key")
+                     //console.log(v,"this is val")
+                    $("#vendorgst").append("<option value='"+v.id+"'>"+v.gst+"  ("+v.state+")</option>")
                 });
 
             });

@@ -45,9 +45,11 @@ class Porder_model  extends CI_Model  {
 
 
     public function addOrder($data){
-        $sql  = "INSERT INTO purchase_order_master SET po_no ='".$data['po_no']."' ,po_date ='".$data['po_date']."',vendor_id ='".$data['vendor_id']."',vendor_bank_id ='".$data['vendor_bank_id']."' ,site_address  ='".$data['site_address']."',ship_to ='".$data['ship_to']."',remarks='".$data['remarks']."' ";
+       // $sql  = "INSERT INTO purchase_order_master SET po_no ='".$data['po_no']."' ,po_date ='".$data['po_date']."',vendor_id ='".$data['vendor_id']."',vendor_bank_id ='".$data['vendor_bank_id']."' ,site_address  ='".$data['site_address']."',ship_to ='".$data['ship_to']."',remarks='".$data['remarks']."' ";
+        //$sql  = "INSERT INTO purchase_order_master SET po_no ='".$data['po_no']."' ,po_date ='".$data['po_date']."',vendor_id ='".$data['vendor_id']."',vendor_bank_id ='".$data['vendor_bank_id']."',remarks='".$data['remarks']."' ";
        // $sql = "INSERT INTO purchase_order_master  SET "
-        $this->db->query($sql);
+        //$this->db->query($sql);
+        $this->db->insert("purchase_order_master",$data);
         $inserId = $this->db->insert_id();
         return $inserId;
 
@@ -121,5 +123,35 @@ right join purchase_order_master pom on pom.id = pot.purchase_order_id where pot
 
 
     }
+
+
+
+    public function getCompanies(){
+
+        $query = "SELECT id ,name FROM company_master";
+        $query=$this->db->query($query);
+        //$row = $query->row();
+        // var_dump($numrows); exit();
+        $result = $query->result();
+
+        return $result;
+
+    }
+
+
+    public function getVendorGST($vendor_id){
+
+        $query = "SELECT vg.id,vg.gst, state_master.state FROM vendor_gst vg  JOIN state_master on state_master.int = vg.state_id where vg.vendor_id= $vendor_id";
+        $query=$this->db->query($query);
+        //$row = $query->row();
+        // var_dump($numrows); exit();
+        $result = $query->result();
+
+        return $result;
+
+    }
+
+
+
 
 }
