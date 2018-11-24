@@ -55,6 +55,9 @@ class Porder extends CI_Controller {
             $data = array();
             $date = date('Y-m-d',strtotime($_POST['po_date']));
 
+           // var_dump($_POST); exit;
+
+
             //var_dump($date); exit;
             $data['po_no'] = $_POST['po_no'];
             $data['po_date']= $date;
@@ -66,7 +69,8 @@ class Porder extends CI_Controller {
             $data['company_id ']= $_POST['company'];
             $data['vendor_ref_no ']= $_POST['refno'];
             $data['tax_id ']= $_POST['vendor_gst'];
-            $data['frieght ']= $_POST['freight'];
+            $data['freight ']= $_POST['freight'];
+            $data['gst_type']= $_POST['gst_type'];
 
             $id = $this->Porder_model->addOrder($data);
 
@@ -87,9 +91,12 @@ class Porder extends CI_Controller {
             $vendors = $this->Porder_model->getVendors();
             $companies = $this->Porder_model->getCompanies();
             //$gsts = $this->Porder_model->getVendorGST();
+            $pid = $this->Porder_model->genratePOID();
+
+            $poid = $pid->id + 1;
 
 
-            $list = $this->load->view('po/add.php', array("vendors" => $vendors,"companies"=>$companies ), TRUE);
+            $list = $this->load->view('po/add.php', array("vendors" => $vendors,"companies"=>$companies,"poid"=>$poid ), TRUE);
 
             $this->load->view('dashboard.php', array("output" => $list));
             // $this->load->view('po/index.php',array("msg"=>$msg));

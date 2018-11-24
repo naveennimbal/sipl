@@ -151,6 +151,18 @@ right join purchase_order_master pom on pom.id = pot.purchase_order_id where pot
 
     }
 
+    public function genratePOID(){
+
+        $query = "SELECT id FROM  purchase_order_master order by(id) desc ";
+
+        $query=$this->db->query($query);
+        //$row = $query->row();
+        // var_dump($numrows); exit();
+        $result = $query->row();
+
+        return $result;
+    }
+
 
 
 

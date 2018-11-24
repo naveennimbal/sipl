@@ -9,12 +9,12 @@
             
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">P.O. Number</label>
-                    <input type="text" class="form-control" required id="po_no" name="po_no" placeholder="Order Number">
+                    <input type="text" class="form-control" required id="po_no" name="po_no" placeholder="Order Number" value="SIPL/<?php echo $poid?>" readonly>
                 </div>
                             
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">P.O. Date</label>
-                    <input type="text" class="form-control datepicker" required id="podate" name="po_date" placeholder="Order Date">
+                    <input type="text" class="form-control datepicker" required id="podate" name="po_date" placeholder="Order Date" autocomplete="off">
                 </div>
 
                 
@@ -128,7 +128,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="gst">GST Applicable</label>
+                    <label for="gst">Vendor GST</label>
                     <select id="vendorgst" name="vendor_gst" class="form-control">
                         <option selected>Choose...</option>
 
@@ -141,7 +141,17 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="freight">Frieght</label>
-                    <input type="text" class="form-control" id="freight" name="freight" placeholder="Freight if any">
+                    <input type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" class="form-control" id="freight" name="freight" placeholder="Freight if any" required="required">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputState">GST Type</label>
+                    <select id="gst" name="gst_type" class="form-control">
+                        <option selected>Choose...</option>
+                        <option value="Same State">Same State</option>
+                        <option value="Other State">Other State</option>
+
+                    </select>
                 </div>
 
             </div>

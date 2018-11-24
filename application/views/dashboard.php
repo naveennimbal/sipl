@@ -17,6 +17,7 @@ $userData = $this->session->userdata("user");
     <title>SIPL Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url()."assets/layout/"?>bootstrap/dist/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- toast CSS -->
@@ -301,6 +302,7 @@ $userData = $this->session->userdata("user");
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php echo base_url()."assets/layout/"?>bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url()."assets/layout/"?>bootstrap/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Menu Plugin JavaScript -->
 <script src="<?php echo base_url()."assets/layout/"?>/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 <!--slimscroll JavaScript -->
@@ -322,5 +324,10 @@ $userData = $this->session->userdata("user");
 <script src="<?php echo base_url()."assets/layout/"?>js/update.js?<?php echo time(); ?>"></script>
 
 
+<script>
 
+    $(document).ready(function () {
+        $('#podate').datepicker({"autoclose":true});
+    })
+</script>
 </html>
