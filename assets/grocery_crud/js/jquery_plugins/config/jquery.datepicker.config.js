@@ -3,7 +3,8 @@ $(function(){
 			dateFormat: js_date_format,
 			showButtonPanel: true,
 			changeMonth: true,
-			changeYear: true
+			changeYear: true,
+        	yearRange: "-40:+0"
 	});
 	
 	$('.datepicker-input-clear').button();
