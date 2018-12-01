@@ -64,7 +64,7 @@ $userData = $this->session->userdata("user");
 
                         //var_dump($trans); exit;
                         ?>
-                        <div class="form-row">
+                        <div class="form-row" id="materialRow">
                             <div class="form-group col-md-3">
 
                                 <label for="inputAddress">Part Number</label>
@@ -96,6 +96,59 @@ $userData = $this->session->userdata("user");
 
                         <?php
                     }
+                } else{
+                    ?>
+
+                    <div class="form-row" id="materialRow" >
+                        <div class="form-group col-md-3">
+
+                            <label for="inputAddress">Part Number</label>
+
+
+
+                            <select name="part_number[]" class="form-control partSelect" onchange="updateVals(this);">
+                                <option value="" selected="selected">Select Item</option>
+                                <?php
+                                foreach ($materials as $material){
+
+                                    ?>
+
+                                    <option value="<?php echo $material->id?>" data-amount="<?php echo $material->amount?>" data-quantity="<?php echo $material->quantity?>"> <?php echo $material->part_no?> </option>
+
+                                <?php
+                                }
+
+                                ?>
+
+                            </select>
+
+
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <label for="inputAddress2">Part Name </label>
+                            <input type="text" class="form-control partName"  name="part_name[]" value="<?php //echo $trans->part_name?>">
+                        </div>
+
+                        <div class="form-group  col-md-1">
+                            <label for="inputAddress2">Quantity </label>
+                            <input type="text" class="form-control quantity" id="inputAddress2" name="quantity[]" value="<?php //echo $trans->quantity?>">
+                        </div>
+
+                        <div class="form-group  col-md-1">
+                            <label for="inputAddress2">Price </label>
+                            <input type="text" class="form-control price" id="inputAddress2" name="price[]" value="<?php //echo $trans->price?>">
+                        </div>
+
+                        <div class="form-group  col-md-1">
+                            <label for="inputAddress2">&nbsp;Remove </label>
+                            <button class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</button>
+                        </div>
+
+                    </div>
+
+
+                <?php
+
                 }
                 ?>
 

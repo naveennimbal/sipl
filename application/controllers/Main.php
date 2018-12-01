@@ -19,7 +19,7 @@ class Main extends CI_Controller
         parent::__construct();
 
 
-        $this->checkLogin();
+
 
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
@@ -31,7 +31,7 @@ class Main extends CI_Controller
         $this->load->library('form_validation');
 
         $this->load->library('grocery_CRUD');
-
+        $this->checkLogin();
 
     }
 
@@ -640,7 +640,7 @@ public function validate_money ($input)
 
     public function company(){
 
-        $crud = new grocery_CRUD();
+        $crud = new Crud();
 
         $crud->set_table('company_master')
             ->set_subject('Company Details')
@@ -837,8 +837,9 @@ public function validate_money ($input)
 
         $crud->set_table('material_master')
             ->set_subject('Material/Item Details')
-            ->columns("item")
-            ->display_as('item','Item Name');
+            ->columns("item","part_no")
+            ->display_as('item','Item Name')
+            ->display_as('part_no','Part No.');
 
         $crud->fields('item');
         $crud->required_fields('item');

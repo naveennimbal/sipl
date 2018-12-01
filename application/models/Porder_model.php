@@ -165,5 +165,16 @@ right join purchase_order_master pom on pom.id = pot.purchase_order_id where pot
 
 
 
+    public  function getMaterials(){
+        $query = "SELECT * from requirement_master where status = 'Approved' ";
+        $query=$this->db->query($query);
+        //$row = $query->row();
+        // var_dump($numrows); exit();
+        $result = $query->result();
+
+        return $result;
+
+    }
+
 
 }

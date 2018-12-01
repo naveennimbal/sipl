@@ -75,14 +75,6 @@ class Porder extends CI_Controller {
             $id = $this->Porder_model->addOrder($data);
 
 
-            /*
-             * company  id
-             * refernce no
-             * gst
-             * frieght
-             * */
-
-            //var_dump($id);
             redirect('porder');
             return;
 
@@ -186,9 +178,11 @@ class Porder extends CI_Controller {
             $poDetail = $this->Porder_model->getOrderDetails($poID);
             $transactions = $this->Porder_model->getOrderTransactions($poID);
 
+            $materials  = $this->Porder_model->getMaterials();
+
             //var_dump($poDetails); exit;
 
-            $this->load->view('po/items.php', array("podetail" => $poDetail,"transaction"=>$transactions));
+            $this->load->view('po/items.php', array("podetail" => $poDetail,"transaction"=>$transactions,"materials"=>$materials));
 
             //echo json_encode($bankArr); exit;
         }

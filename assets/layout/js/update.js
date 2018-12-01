@@ -115,6 +115,8 @@ $(document).ready(function(){
                     '\n' +
                     '                </div>';
 
+                itemHtml = $("#materialRow").html();
+
 
 
 
@@ -133,6 +135,7 @@ $(document).ready(function(){
 
         };
     })( jQuery );
+
 
 
 
@@ -176,6 +179,21 @@ $(document).ready(function(){
 
 
 })
+
+
+function updateVals(select){
+    //console.log($(select).find(":selected").data('amount'));
+    $(select).next('div.form-group').html("dsjkfhksd");
+
+    selectParentDiv = $(select).parent('div');
+    console.log(selectParentDiv.next('div').children('input').val("dfhdksj"));
+
+    //var x = document.getElementsByClassName("partSelect").next
+
+    //console.log(x);
+    $(select).next("input[name='quantity[]']").val($(select).find(":selected").data('quantity'))
+    $(select).next("input[name='price[]']").val($(select).find(":selected").data('amount'))
+}
 
 /*var element;
 
