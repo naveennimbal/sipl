@@ -35,7 +35,7 @@ $userData = $this->session->userdata("user");
 
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <div class="white-box">
                 <h3 class="box-title">Items of Purchase Order <span style="color: #ff430d; font-weight: bold"><?php echo $podetail->po_no?></span></h3> </div>
 

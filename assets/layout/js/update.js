@@ -183,10 +183,18 @@ $(document).ready(function(){
 
 function updateVals(select){
     //console.log($(select).find(":selected").data('amount'));
-    $(select).next('div.form-group').html("dsjkfhksd");
+    //$(select).next('div.form-group').html("dsjkfhksd");
+
+    var selectParentDiv;
 
     selectParentDiv = $(select).parent('div');
     console.log(selectParentDiv.next('div').children('input').val("dfhdksj"));
+    // This is for part name
+    selectParentDiv.next('div').children('input').val("part name");
+    // this is for qunatity
+
+    selectParentDiv.next('div').next('div').children('input').val($(select).find(":selected").data('quantity'));
+    selectParentDiv.next('div').next('div').next('div').children('input').val($(select).find(":selected").data('amount'));
 
     //var x = document.getElementsByClassName("partSelect").next
 
