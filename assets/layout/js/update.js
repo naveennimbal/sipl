@@ -196,12 +196,61 @@ function updateVals(select){
     selectParentDiv.next('div').next('div').children('input').val($(select).find(":selected").data('quantity'));
     selectParentDiv.next('div').next('div').next('div').children('input').val($(select).find(":selected").data('amount'));
 
+    // setting the amount
+
+    var qty = $(select).find(":selected").data('quantity');
+    var price = $(select).find(":selected").data('amount');
+
+    total = qty * price;
+
+    selectParentDiv.next('div').next('div').next('div').next('div').children('input').val(total);
+
     //var x = document.getElementsByClassName("partSelect").next
 
     //console.log(x);
     $(select).next("input[name='quantity[]']").val($(select).find(":selected").data('quantity'))
     $(select).next("input[name='price[]']").val($(select).find(":selected").data('amount'))
+
+    // seting the amount
+
+
 }
+
+
+function updateQty (qty) {
+
+    var qtyVal = $(qty).val();
+
+    parentDiv = $(qty).parent('div');
+
+
+    rate = parentDiv.next('div').children('input').val();
+
+    total = qtyVal * rate;
+    parentDiv.next('div').next('div').children('input').val(total);
+
+
+
+}
+
+function updatePrice (price) {
+
+    var priceVal = $(price).val();
+
+    parentDiv = $(price).parent('div');
+
+    qty = parentDiv.prev('div').children('input').val()
+
+    //rate = parentDiv.next('div').children('input').val();
+
+    total = priceVal * qty;
+
+    parentDiv.next('div').children('input').val(total);
+
+
+
+}
+
 
 /*var element;
 

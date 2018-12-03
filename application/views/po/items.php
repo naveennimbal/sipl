@@ -67,24 +67,59 @@ $userData = $this->session->userdata("user");
                         <div class="form-row" id="materialRow">
                             <div class="form-group col-md-3">
 
-                                <label for="inputAddress">Part Number</label>
+                                <label for="inputAddress">Part Name</label>
 
-                                <input type="text" class="form-control" id="inputAddress" name="part_number[]" value="<?php echo $trans->part_no?>">
+
+                                <select name="part_number[]" class="form-control partSelect" onchange="updateVals(this);">
+                                    <option value="" selected="selected">Select Item</option>
+                                    <?php
+                                    $selected = "";
+                                    foreach ($materials as $material){
+
+                                      //  echo $material->id ."------". $trans->part_no;
+
+                                        if($material->id == $trans->part_no){
+                                            $selected = "selected='selected'";
+                                        }
+                                        ?>
+
+                                        <option <?php echo $selected;?> value="<?php echo $material->id?>" data-amount="<?php echo $material->amount?>" data-quantity="<?php echo $material->quantity?>"> <?php echo $material->item?> </option>
+
+                                        <?php
+                                        $selected="";
+                                    }
+
+                                    ?>
+
+                                </select>
 
                             </div>
-                            <div class="form-group  col-md-6">
-                                <label for="inputAddress2">Part Name </label>
-                                <input type="text" class="form-control" id="inputAddress2" name="part_name[]" value="<?php echo $trans->part_name?>">
+                            <div class="form-group  col-md-5">
+                                <label for="inputAddress2">Description </label>
+                                <input type="number" class="form-control" id="inputAddress2" name="part_name[]" value="<?php echo $trans->part_name?>">
                             </div>
 
                             <div class="form-group  col-md-1">
                                 <label for="inputAddress2">Quantity </label>
-                                <input type="text" class="form-control" id="inputAddress2" name="quantity[]" value="<?php echo $trans->quantity?>">
+                                <input required type="number" class="form-control" id="inputAddress2" name="quantity[]" onblur="updateQty(this);" value="<?php echo $trans->quantity?>" pattern="/^-?\d*\.?\d{0,2}$/">
                             </div>
 
                             <div class="form-group  col-md-1">
-                                <label for="inputAddress2">Price </label>
-                                <input type="text" class="form-control" id="inputAddress2" name="price[]" value="<?php echo $trans->price?>">
+                                <label for="inputAddress2">Unit Rate </label>
+                                <input required type="number" class="form-control" id="inputAddress2" name="price[]" onblur="updatePrice(this);" value="<?php echo $trans->price?>" pattern="/^-?\d*\.?\d{0,2}$/">
+                            </div>
+
+
+
+                            <?php
+
+                            $amount = (int)$trans->quantity * (float)$trans->price;
+                            ?>
+
+
+                            <div class="form-group  col-md-1">
+                                <label for="inputAddress2">Amount </label>
+                                <input type="text" class="form-control" id="inputAddress2" name="amount[]" value="<?php echo $amount?>" readonly style="background:  #d3f4b4 ; font-weight:bold ">
                             </div>
 
                             <div class="form-group  col-md-1">
@@ -113,7 +148,7 @@ $userData = $this->session->userdata("user");
 
                                     ?>
 
-                                    <option value="<?php echo $material->id?>" data-amount="<?php echo $material->amount?>" data-quantity="<?php echo $material->quantity?>"> <?php echo $material->part_no?> </option>
+                                    <option value="<?php echo $material->id?>" data-amount="<?php echo $material->amount?>" data-quantity="<?php echo $material->quantity?>"> <?php echo $material->item?> </option>
 
                                 <?php
                                 }
@@ -124,19 +159,24 @@ $userData = $this->session->userdata("user");
 
 
                         </div>
-                        <div class="form-group  col-md-6">
-                            <label for="inputAddress2">Part Name </label>
+                        <div class="form-group  col-md-5">
+                            <label for="inputAddress2">description </label>
                             <input type="text" class="form-control partName"  name="part_name[]" value="<?php //echo $trans->part_name?>">
                         </div>
 
                         <div class="form-group  col-md-1">
                             <label for="inputAddress2">Quantity </label>
-                            <input type="text" class="form-control quantity" id="inputAddress2" name="quantity[]" value="<?php //echo $trans->quantity?>">
+                            <input type="number" class="form-control quantity" id="inputAddress2" name="quantity[]" onblur="updateQty(this)" value="<?php //echo $trans->quantity?>">
                         </div>
 
                         <div class="form-group  col-md-1">
-                            <label for="inputAddress2">Price </label>
-                            <input type="text" class="form-control price" id="inputAddress2" name="price[]" value="<?php //echo $trans->price?>">
+                            <label for="inputAddress2">Unit Rate </label>
+                            <input type="number" class="form-control price" id="inputAddress2" name="price[]" onblur="updatePrice(this)" value="<?php //echo $trans->price?>">
+                        </div>
+
+                        <div class="form-group  col-md-1">
+                            <label for="inputAddress2">Amount </label>
+                            <input type="number" class="form-control" id="inputAddress2" name="amount[]" value="<?php echo $amount?>" readonly style="background:  #d3f4b4 ; font-weight:bold ">
                         </div>
 
                         <div class="form-group  col-md-1">
