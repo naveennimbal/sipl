@@ -128,10 +128,27 @@ $(document).ready(function(){
 
     (function( $ ){
         $.fn.removeItem = function(ele) {
+            con = confirm("Are you sure ?")
+            if(con ){
+                // make the finction to delete from server
+
+                select = $(ele).parent('div').prev('div').prev('div').prev('div').prev('div').children('select');
+                parentDiv = $(ele).parent('div');
+                partSelect = $(parentDiv).prev().prev().prev().prev().prev().children('select');
+
+                itemId = $(partSelect).val();
+                console.log(itemId);
+
+                selVal = $("select").val($(parentDiv).prev().prev().html());
+                //alert(selVal);
+
+                //$(ele).parent().parent().remove();
+
+            }
             //alert("dfds");
             //event.stopPropagation();
             //console.log($(ele).html())
-            $(ele).parent().parent().remove();
+
 
         };
     })( jQuery );
@@ -151,6 +168,7 @@ $(document).ready(function(){
     $(document).on("click", 'a.removeItemBtn', function(){
        // alert("sdsad");
         $.fn.removeItem(this);
+        return false;
     })
 
     $(document).on("click", '#submitItemForm', function(eve){
@@ -222,8 +240,6 @@ function updateQty (qty) {
     var qtyVal = $(qty).val();
 
     parentDiv = $(qty).parent('div');
-
-
     rate = parentDiv.next('div').children('input').val();
 
     total = qtyVal * rate;

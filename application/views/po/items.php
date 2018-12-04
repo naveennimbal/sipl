@@ -35,7 +35,7 @@ $userData = $this->session->userdata("user");
 
 
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="white-box">
                 <h3 class="box-title">Items of Purchase Order <span style="color: #ff430d; font-weight: bold"><?php echo $podetail->po_no?></span></h3> </div>
 
@@ -56,7 +56,7 @@ $userData = $this->session->userdata("user");
     <form id="itemform" method="post">
             <div id="itemRow">
 
-                <input type="hidden" name="poid" value="<?php echo $podetail->id?>">
+                <input type="hidden" name="poid" id="poid" value="<?php echo $podetail->id?>">
 
                 <?php
                 if(count($transaction)>0){
@@ -96,7 +96,9 @@ $userData = $this->session->userdata("user");
                             </div>
                             <div class="form-group  col-md-5">
                                 <label for="inputAddress2">Description </label>
-                                <input type="number" class="form-control" id="inputAddress2" name="part_name[]" value="<?php echo $trans->part_name?>">
+
+                                <textarea rows="1" cols="8" class="form-control" id="inputAddress2" name="part_name[]" style="height: 38px !important;" ><?php echo $trans->part_name?></textarea>
+
                             </div>
 
                             <div class="form-group  col-md-1">
@@ -124,7 +126,7 @@ $userData = $this->session->userdata("user");
 
                             <div class="form-group  col-md-1">
                                 <label for="inputAddress2">&nbsp;Remove </label>
-                                <button class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</button>
+                                <a class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</a>
                             </div>
 
                         </div>
@@ -161,7 +163,7 @@ $userData = $this->session->userdata("user");
                         </div>
                         <div class="form-group  col-md-5">
                             <label for="inputAddress2">description </label>
-                            <input type="text" class="form-control partName"  name="part_name[]" value="<?php //echo $trans->part_name?>">
+                            <textarea rows="1" cols="8" class="form-control" id="inputAddress2" name="part_name[]" style="height: 38px !important;" ></textarea>
                         </div>
 
                         <div class="form-group  col-md-1">
@@ -181,7 +183,7 @@ $userData = $this->session->userdata("user");
 
                         <div class="form-group  col-md-1">
                             <label for="inputAddress2">&nbsp;Remove </label>
-                            <button class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</button>
+                            <a class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</a>
                         </div>
 
                     </div>

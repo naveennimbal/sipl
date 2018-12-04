@@ -29,8 +29,8 @@
 
 
 
-                <td><a class="additem" href="<?php echo base_url('porder/additems')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "80%","height":"90%"}}}'>Add Items</a>
-                /<a class="additem" href="<?php echo base_url('porder/poview')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "80%","height":"90%"}}}'>View</a> </td>
+                <td><a class="additem" href="<?php echo base_url('porder/additems')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "95%","height":"95%"}}}'>Add Items</a>
+                /<a class="additem" href="<?php echo base_url('porder/poview')?>/<?php echo $order->id?>" data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "95%","height":"95%"}}}'>View</a> </td>
             </tr>
            <?php endforeach;?>
 
