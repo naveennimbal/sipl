@@ -71,7 +71,7 @@ $userData = $this->session->userdata("user");
 
 
                                 <select name="part_number[]" class="form-control partSelect" onchange="updateVals(this);">
-                                    <option value="" selected="selected">Select Item</option>
+                                    <option>Select Item</option>
                                     <?php
                                     $selected = "";
                                     foreach ($materials as $material){
@@ -144,7 +144,7 @@ $userData = $this->session->userdata("user");
 
 
                             <select name="part_number[]" class="form-control partSelect" onchange="updateVals(this);">
-                                <option value="" selected="selected">Select Item</option>
+                                <option value="">Select Item</option>
                                 <?php
                                 foreach ($materials as $material){
 
@@ -178,7 +178,7 @@ $userData = $this->session->userdata("user");
 
                         <div class="form-group  col-md-1">
                             <label for="inputAddress2">Amount </label>
-                            <input type="number" class="form-control" id="inputAddress2" name="amount[]" value="<?php echo $amount?>" readonly style="background:  #d3f4b4 ; font-weight:bold ">
+                            <input type="number" class="form-control" id="inputAddress2" name="amount[]" value="<?php //echo $amount?>" readonly style="background:  #d3f4b4 ; font-weight:bold ">
                         </div>
 
                         <div class="form-group  col-md-1">

@@ -136,10 +136,45 @@ $(document).ready(function(){
                 parentDiv = $(ele).parent('div');
                 partSelect = $(parentDiv).prev().prev().prev().prev().prev().children('select');
 
-                itemId = $(partSelect).val();
-                console.log(itemId);
+                itemID = $(partSelect).children("option:selected").val();
+               // console.log(itemId);
+                //$('.fancybox-iframe')[0].contentWindow.location.reload(true);
+               // document.getElementsByClassName('fancybox-iframe').location.reload(true);
+               //document.getElementsByClassName('fancybox-iframe').location.reload(true);
+                $('fancybox-iframe').each(function() {
+                    this.contentWindow.location.reload(true);
+                });
 
-                selVal = $("select").val($(parentDiv).prev().prev().html());
+                poID = $("#poid").val();
+                console.log(poID,"poid");
+                console.log(itemID,"itemid");
+
+                $.ajax({
+                    type: 'post',
+                    url: window.baseurl+'porder/deleteitem',
+                    data: {poid:poID,itemId:itemID},
+                    success: function (xhr) {
+                         console.log(xhr);
+                        data = $.parseJSON(xhr)
+                        if (data==="SUCCESS"){
+                            alert("Item deleted  successfully");
+                            $(ele).parent().parent().remove();
+                           // $.fancybox.close();
+                        }
+                        if (data==="FAIL"){
+                            alert("Something went wrong");
+                           // $.fancybox.close();
+                        }
+                    }
+                });
+
+
+                return false;
+
+
+
+
+                // selVal = $("select").val($(parentDiv).prev().prev().html());
                 //alert(selVal);
 
                 //$(ele).parent().parent().remove();
@@ -178,7 +213,7 @@ $(document).ready(function(){
             url: 'porder/additems',
             data: $('form').serialize(),
             success: function (xhr) {
-               // console.log(xhr);
+                console.log(xhr);
                 data = $.parseJSON(xhr)
                 if (data.result=="SUCCESS"){
                     alert("Item added successfully");
@@ -193,7 +228,7 @@ $(document).ready(function(){
 
             return false;
 
-    })
+    });
 
 
 })

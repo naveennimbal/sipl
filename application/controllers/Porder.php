@@ -189,6 +189,19 @@ class Porder extends CI_Controller {
 
     }
 
+    public function deleteitem(){
+        $result = array();
+        if($_POST){
+            $del = $this->Porder_model->deletePOItem($_POST['poid'],$_POST['itemId']);
+            echo json_encode($result['status']="SUCCESS");
+            return;
+
+        } else {
+            echo json_encode($result['status']="FAIL");
+            return;
+        }
+    }
+
 
     public function poview($po_id){
 

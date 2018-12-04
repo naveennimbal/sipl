@@ -98,9 +98,14 @@ right join purchase_order_master pom on pom.id = pot.purchase_order_id where pot
 
 
     public function deletePreviousOrderItems($po_id){
-        $this->db->query("select * from purchase_order_transaction where purchase_order_id = $po_id" );
+        $this->db->query("delete  from purchase_order_transaction where purchase_order_id = $po_id" );
         return;
 
+    }
+
+    public function  deletePOItem($poid,$itemId){
+        $this->db->query("delete from purchase_order_transaction where  purchase_order_id = $poid and part_no = $itemId ");
+        return;
     }
 
 
