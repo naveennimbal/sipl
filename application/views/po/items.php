@@ -126,7 +126,7 @@ $userData = $this->session->userdata("user");
 
                             <div class="form-group  col-md-1">
                                 <label for="inputAddress2">&nbsp;Remove </label>
-                                <a class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</a>
+                                <a class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span></a>
                             </div>
 
                         </div>
@@ -183,7 +183,7 @@ $userData = $this->session->userdata("user");
 
                         <div class="form-group  col-md-1">
                             <label for="inputAddress2">&nbsp;Remove </label>
-                            <a class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span> Remove</a>
+                            <a class="btn btn-danger removeItemBtn"><span class="glyphicon glyphicon-minus-sign"></span></a>
                         </div>
 
                     </div>
