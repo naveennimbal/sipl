@@ -194,7 +194,7 @@ $userData = $this->session->userdata("user");
 
     <div class="clearfix"></div>
 
-    <div class="thank-you">Naveen</div>
+    <div class="thank-you">Thank You </div>
 
     <div class="clearfix"></div>
 </div>
